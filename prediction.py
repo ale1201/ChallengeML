@@ -2,8 +2,8 @@ import cv2
 import numpy as np
 from tensorflow import keras
 import matplotlib.pyplot as plt
-modelo = './modelo.h5'
-pesos_modelo = './pesos.h5'
+modelo = 'modelo.h5'
+pesos_modelo = 'pesos.h5'
 cnn = keras.models.load_model(modelo)
 cnn.load_weights(pesos_modelo)
 def predict(file):
