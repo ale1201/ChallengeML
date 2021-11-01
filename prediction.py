@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-tensorflow.keras.models import load_model
+from tensorflow.keras.models import load_model
 import matplotlib.pyplot as plt
 modelo = 'modelo.h5'
 pesos_modelo = 'pesos.h5'
