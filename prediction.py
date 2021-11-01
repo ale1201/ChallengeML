@@ -3,18 +3,6 @@ import numpy as np
 from tensorflow import keras
 from keras.preprocessing.image import load_img, img_to_array
 from keras.models import load_model
-modelo = './modelo.h5'
-pesos_modelo = './pesos.h5'
-cnn = load_model(modelo)
-cnn.load_weights(pesos_modelo)
-def predict(file):
-  x = load_img(file, target_size=(180, 180))
-  x = img_to_array(x)
-import cv2
-import numpy as np
-from tensorflow import keras
-from keras.preprocessing.image import load_img, img_to_array
-from keras.models import load_model
 import matplotlib.pyplot as plt
 modelo = './modelo/modelo.h5'
 pesos_modelo = './modelo/pesos.h5'
