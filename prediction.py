@@ -8,7 +8,7 @@ cnn = keras.models.load_model(modelo)
 cnn.load_weights(pesos_modelo)
 def predict(file):
   x = cv2.resize(file, dsize=(180, 180))
-  x = keras.preprocessing.image.img_to_array.(x)
+  x = keras.preprocessing.image.img_to_array(x)
   x = np.expand_dims(x, axis=0)
   array = cnn.predict(x)
   result = array[0]
