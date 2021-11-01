@@ -2,8 +2,9 @@ import cv2
 import numpy as np
 from tensorflow.keras.models import load_model
 import matplotlib.pyplot as plt
-modelo = 'model.tflite'
+modelo = 'modelo.h5'
 cnn = load_model(modelo)
+cnn.load_weights(pesos_modelo)
 def predict(file):
   x = cv2.resize(file, dsize=(180, 180))
   x = keras.preprocessing.image.img_to_array(x)
