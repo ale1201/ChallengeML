@@ -43,7 +43,7 @@ def predict(file):
     answer = 0
     print("pred: trafficlight (0)")
 
-vc = cv2.VideoCapture(1)
+vc = cv2.VideoCapture(0)
 
 if vc.isOpened():
   is_capturing, frame = vc.read()
