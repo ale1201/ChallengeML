@@ -9,36 +9,27 @@ interpreter.allocate_tensors()
 # Get input and output tensors.
 input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
-print('Salida= ',output_details)
-print('Entrada= ',input_details)
 
 # Test model on random input data.
 floating_model = input_details[0]['dtype']
 floating_model2  = input_details[0]['dtype'] == np.float32
 input_shape = input_details[0]['shape']
-input_mean = 127.5
-input_std = 127.5
 
 def predict(file):
-
-  x = cv2.resize(file, dsize=(input_shape[1], input_shape[2]), interpolation = cv2.INTER_AREA)
-
-  input_frame = (np.float32(x) - input_mean) / input_std
-  cv2.imshow('Frame', input_frame)
-
-  input_data = np.expand_dims(input_frame, axis=0)
-
-  #image = np.array(x, dtype=floating_model)
+  x = cv2.resize(file, dsize=(input_shape[1], input_shape[2]))
+  cv2.imshow('Frame', x)
+  image = np.array(x, dtype=floating_model)
 
 
-  #image = np.expand_dims(image, axis=0)
+  image = np.expand_dims(image, axis=0)
 
-  interpreter.set_tensor(input_details[0]['index'], input_data)
+  interpreter.set_tensor(input_details[0]['index'], image)
 
   interpreter.invoke()
 
   output_data = interpreter.get_tensor(output_details[0]['index'])
   results = output_data
+  print(results)
   answer = np.argmax(results)
   if answer == 0:
     answer = 3
@@ -53,7 +44,7 @@ def predict(file):
     answer = 0
     print("pred: trafficlight (0)")
 
-vc = cv2.VideoCapture(0)
+vc = cv2.VideoCapture(1)
 
 if vc.isOpened():
   is_capturing, frame = vc.read()
@@ -66,7 +57,7 @@ while is_capturing:
   try:
     is_capturing, frame = vc.read()
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    #webcam_preview = plt.imshow(frame)
+    webcam_preview = plt.imshow(frame)
     predict(frame)
 
     try:
